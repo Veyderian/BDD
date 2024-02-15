@@ -17,21 +17,22 @@ public class TransferPage {
     private final SelenideElement transferHead = $(byText("Пополнение карты"));
     private final SelenideElement errorMassage = $("[data-test-id='error-notification']");
 
-public  TransferPage() {
-    transferHead.shouldBe(visible);
-}
- public DashboardPage makeValidTransfer(String amountToTransfer, DataHelper.CardInfo cardInfo) {
-    makeTransfer(amountToTransfer, cardInfo);
-    return  new DashboardPage();
- }
+    public TransferPage() {
+        transferHead.shouldBe(visible);
+    }
 
- public  void makeTransfer(String amountToTransfer, DataHelper.CardInfo cardInfo) {
-    amountInput.setValue(amountToTransfer);
-    fromInput.setValue(cardInfo.getCardNumber());
-    transferButton.click();
- }
+    public DashboardPage makeValidTransfer(String amountToTransfer, DataHelper.CardInfo cardInfo) {
+        makeTransfer(amountToTransfer, cardInfo);
+        return new DashboardPage();
+    }
 
- public void findErrorMassage(String expectedText) {
-    errorMassage.shouldHave(text(expectedText), Duration.ofSeconds(15)).shouldBe(visible);
- }
+    public void makeTransfer(String amountToTransfer, DataHelper.CardInfo cardInfo) {
+        amountInput.setValue(amountToTransfer);
+        fromInput.setValue(cardInfo.getCardNumber());
+        transferButton.click();
+    }
+
+    public void findErrorMassage(String expectedText) {
+        errorMassage.shouldHave(text(expectedText), Duration.ofSeconds(15)).shouldBe(visible);
+    }
 }
