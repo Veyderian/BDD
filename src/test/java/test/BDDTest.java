@@ -16,9 +16,9 @@ public class BDDTest {
     int firstCardBalance;
     int secondCardBalance;
 
-@BeforeEach
-void setup() {
-    var loginPage = Selenide.open("http://localhost:9999",LoginPage.class);
+    @BeforeEach
+    void setup() {
+        var loginPage = Selenide.open("http://localhost:9999", LoginPage.class);
 
         var authInfo = getAuthInfo();
         var verificationPage = loginPage.validLogin(authInfo);
@@ -26,8 +26,8 @@ void setup() {
         dashboardPage = verificationPage.validVerify(verificationCode);
         firstCardInfo = getFirstCardInfo();
         secondCardInfo = getSecondCardInfo();
-    firstCardBalance = dashboardPage.getCardBalance(firstCardInfo);
-    secondCardBalance = dashboardPage.getCardBalance(secondCardInfo);
+        firstCardBalance = dashboardPage.getCardBalance(firstCardInfo);
+        secondCardBalance = dashboardPage.getCardBalance(secondCardInfo);
          }
 
          @Test //1
@@ -60,7 +60,7 @@ void setup() {
 
     @Test //3
     void shouldGetErrorMassageIfAmountMoreBalance() {
-    var amount = generateValidAmount(secondCardBalance);
+        var amount = generateValidAmount(secondCardBalance);
         var transferPage = dashboardPage.selectCardToTransfer(firstCardInfo);
         transferPage.makeTransfer(String.valueOf(amount), secondCardInfo);
         transferPage.findErrorMassage("Выполнена попытка перевода суммы, превышающей остаток на карте списания");
